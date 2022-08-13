@@ -1,4 +1,4 @@
-PLUGIN.name = "Waschbär: Better Damage"
+PLUGIN.name = "Better Damage"
 PLUGIN.author = "Waschbär"
 PLUGIN.description = "multiplies the damage on certain body parts."
 
@@ -40,7 +40,7 @@ if SERVER then
 				else
 					if ( hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTARM ) then
 							dmginfo:ScaleDamage( ix.config.Get("ArmDamage") )
-						else
+					else
 						if ( hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG ) then
 							dmginfo:ScaleDamage( ix.config.Get("LegDamage") )
 						end
