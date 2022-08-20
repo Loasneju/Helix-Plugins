@@ -29,24 +29,29 @@ ix.config.Add("LegDamage", 1, "Default = 1, this setting will increase or decrea
 
 if SERVER then
 	function PLUGIN:ScalePlayerDamage( ply, hitgroup, dmginfo )
-		if ( hitgroup == HITGROUP_HEAD ) then
-			dmginfo:ScaleDamage( ix.config.Get("HeadshotDamage") )
-		else
-			if ( hitgroup == HITGROUP_CHEST ) then
-				dmginfo:ScaleDamage( ix.config.Get("ChestDamage") )
-			else
-				if ( hitgroup == HITGROUP_STOMACH ) then
-					dmginfo:ScaleDamage( ix.config.Get("StomachDamage") )
-				else
-					if ( hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTARM ) then
-							dmginfo:ScaleDamage( ix.config.Get("ArmDamage") )
-					else
-						if ( hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG ) then
-							dmginfo:ScaleDamage( ix.config.Get("LegDamage") )
-						end
-					end
-				end
-			end
-		end
-	end
+		local hitgroups = {
+                [HITGROUP_HEAD] = function ()
+                    dmginfo:ScaleDamage( ix.config.Get("HeadshotDamage") )
+                end,
+                [HITGROUP_CHEST] = function ()
+                    dmginfo:ScaleDamage( ix.config.Get("ChestDamage") )
+                end,
+                [HITGROUP_STOMACH] = function ()
+                    dmginfo:ScaleDamage( ix.config.Get("StomachDamage") )
+                end,
+                [HITGROUP_LEFTARM] = function ()
+                    dmginfo:ScaleDamage( ix.config.Get("ArmDamage") )
+                end,
+                [HITGROUP_LEFTLEG] = function ()
+                    dmginfo:ScaleDamage( ix.config.Get("LegDamage") )
+                end,
+                [HITGROUP_RIGHTARM] = function ()
+                    dmginfo:ScaleDamage( ix.config.Get("ArmDamage") )
+                end,
+                [HITGROUP_RIGHTLEG] = function ()
+                    dmginfo:ScaleDamage( ix.config.Get("LegDamage") )
+                end
+			}
+            hitgroups[hitgroup]()
+    end    
 end
