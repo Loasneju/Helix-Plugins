@@ -7,8 +7,8 @@ PLUGIN.description = "Adds a cooldown to jumping and prevents player from bhop."
 local last_jump_time = 0
 local jump_cooldown = 0.8
 
-function PLUGIN:SetupMove(ply, mv, cmd)
-    if ply:OnGround() and mv:KeyPressed(IN_JUMP) then
+function PLUGIN:SetupMove(client, mv, cmd)
+    if client:OnGround() and mv:KeyPressed(IN_JUMP) then
         local cur_time = CurTime()
         if cur_time - last_jump_time < jump_cooldown then
             mv:SetButtons(bit.band(mv:GetButtons(), bit.bnot(IN_JUMP)))
